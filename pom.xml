@@ -12,6 +12,24 @@
     <module>fault-simulator-provider</module>
   </modules>
 
+  <properties>
+    <cse.version>2.3.62</cse.version>
+  </properties>
+
+  <dependencies>
+    <!-- introduce some util to ease to the usage -->
+    <dependency>
+      <groupId>com.huawei.paas.cse</groupId>
+      <artifactId>foundation-auth</artifactId>
+      <version>${cse.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.huawei.paas.cse</groupId>
+      <artifactId>cse-handler-cloud-extension</artifactId>
+      <version>${cse.version}</version>
+    </dependency>
+  </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
