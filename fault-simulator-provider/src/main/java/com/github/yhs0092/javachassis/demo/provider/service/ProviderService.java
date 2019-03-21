@@ -12,6 +12,11 @@ public class ProviderService {
   @Path("get")
   @GET
   public String get(@QueryParam("q") String q) {
+    try {
+      Thread.sleep(1500);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     return q;
   }
 }
