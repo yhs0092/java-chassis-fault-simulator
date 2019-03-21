@@ -22,6 +22,12 @@
       <groupId>com.huawei.paas.cse</groupId>
       <artifactId>foundation-auth</artifactId>
       <version>${cse.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.huawei.paas.cse</groupId>

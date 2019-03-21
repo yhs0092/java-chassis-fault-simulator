@@ -7,9 +7,18 @@
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="[%d][%p][%t][%marker]%m %l%n"/>
     </Console>
-    <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${log_path}/output.log"
-      filePattern="${log_path}/consumer-%d{yyyy-MM-dd}-%i.log">
+    <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${log_path}/provider.log"
+      filePattern="${log_path}/provider-%d{yyyy-MM-dd}-%i.log">
       <PatternLayout pattern="[%d][%p][%t][%marker]%m %l%n"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="200 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="99"/>
+    </RollingRandomAccessFile>
+
+    <RollingRandomAccessFile name="AccessLogAppender" fileName="${log_path}/provider-accesslog.log"
+      filePattern="${log_path}/provider-accesslog-%d{yyyy-MM-dd}-%i.log">
+      <PatternLayout pattern="%m%n"/>
       <Policies>
         <SizeBasedTriggeringPolicy size="200 MB"/>
       </Policies>
@@ -21,5 +30,8 @@
       <AppenderRef ref="Console"/>
       <AppenderRef ref="RollingRandomAccessFile"/>
     </Root>
+    <Logger name="accesslog" level="info" additivity="false">
+      <AppenderRef ref="AccessLogAppender"/>
+    </Logger>
   </Loggers>
 </configuration>
