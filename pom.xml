@@ -10,6 +10,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <modules>
     <module>fault-simulator-provider</module>
+    <module>fault-simulator-consumer</module>
+    <module>fault-simulator-edge</module>
   </modules>
 
   <properties>
