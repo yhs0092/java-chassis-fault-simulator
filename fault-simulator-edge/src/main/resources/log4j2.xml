@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <Properties>
+    <Property name="log_path">./target/log/</Property>
+  </Properties>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%d][%p][%t][%marker]%m %l%n"/>
+    </Console>
+    <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${log_path}/edge.log"
+      filePattern="${log_path}/edge-%d{yyyy-MM-dd}-%i.log">
+      <PatternLayout pattern="[%d][%p][%t][%marker]%m %l%n"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="200 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="99"/>
+    </RollingRandomAccessFile>
+
+    <RollingRandomAccessFile name="AccessLogAppender" fileName="${log_path}/edge-accesslog.log"
+      filePattern="${log_path}/edge-accesslog-%d{yyyy-MM-dd}-%i.log">
+      <PatternLayout pattern="%m%n"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="200 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="99"/>
+    </RollingRandomAccessFile>
+  </Appenders>
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingRandomAccessFile"/>
+    </Root>
+    <Logger name="accesslog" level="info" additivity="false">
+      <AppenderRef ref="AccessLogAppender"/>
+    </Logger>
+  </Loggers>
+</configuration>
