@@ -12,6 +12,7 @@
     <module>fault-simulator-provider</module>
     <module>fault-simulator-consumer</module>
     <module>fault-simulator-edge</module>
+    <module>fault-simulator-common</module>
   </modules>
 
   <properties>
@@ -20,6 +21,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <cse.version>2.3.62</cse.version>
     <servicecomb.version>1.2.0-SNAPSHOT</servicecomb.version>
+    <junit.version>4.12</junit.version>
   </properties>
 
   <dependencies>
@@ -50,6 +52,11 @@
         <version>${servicecomb.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
