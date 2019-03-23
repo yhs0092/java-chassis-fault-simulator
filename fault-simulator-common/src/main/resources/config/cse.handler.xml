@@ -1,0 +1,4 @@
+<config>
+  <handler id="fault-simulator-handler"
+    class="com.github.yhs0092.javachassis.demo.common.fault.extension.FaultInjectionHandler"/>
+</config>

@@ -13,6 +13,13 @@ servicecomb:
     client:
       enabled: false
 
+  handler:
+    chain:
+      Provider:
+        default: qps-flowcontrol-provider,fault-simulator-handler
+      Consumer:
+        default: qps-flowcontrol-consumer,loadbalance,fault-simulator-handler,fault-injection-consumer
+
   accesslog:
     enabled: true
     pattern: "%h cs-method cs-uri %s %B %D %SCB-traceId"

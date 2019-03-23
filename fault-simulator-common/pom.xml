@@ -11,6 +11,12 @@
 
   <artifactId>fault-simulator-common</artifactId>
   <dependencies>
+    <!--ServiceComb-Java-Chassis extensions-->
+    <dependency>
+      <groupId>org.apache.servicecomb</groupId>
+      <artifactId>common-rest</artifactId>
+    </dependency>
+    <!-- junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

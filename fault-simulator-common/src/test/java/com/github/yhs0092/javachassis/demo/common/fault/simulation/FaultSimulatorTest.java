@@ -1,28 +1,24 @@
-package com.github.yhs0092.javachassis.demo.common.fault;
+package com.github.yhs0092.javachassis.demo.common.fault.simulation;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultSimulationItem;
-import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultSimulationManager;
-import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultSimulationOrder;
-import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultType;
-import com.github.yhs0092.javachassis.demo.common.fault.simulation.FramePosition;
 import com.google.common.collect.Lists;
 
-public class FaultSimulationManagerTest {
+public class FaultSimulatorTest {
 
-  private FaultSimulationManager faultSimulationManager = new FaultSimulationManager("testSvc", FramePosition.BIZ);
+  private FaultSimulator faultSimulator = new FaultSimulator();
 
   @Test
   public void consumeFaultSimulationItem_delay() {
     FaultSimulationItem faultSimulationItem =
-        createFaultSimulationItem("testSvc", FramePosition.BIZ, FaultType.DELAY, "1000");
+        createFaultSimulationItem("testSvc", FramePosition.BIZ_AF, FaultType.DELAY, "1000");
 
     long start = System.currentTimeMillis();
-    faultSimulationManager.consumeFaultSimulationItem(createFaultSimulationOrder(faultSimulationItem));
+    faultSimulator
+        .consumeFaultSimulationItem("testSvc", FramePosition.BIZ_AF, createFaultSimulationOrder(faultSimulationItem));
     long actualDelay = System.currentTimeMillis() - start;
     Assert.assertTrue("actualDelay = " + actualDelay, actualDelay > 990);
   }
@@ -30,13 +26,13 @@ public class FaultSimulationManagerTest {
   @Test
   public void consumeFaultSimulationItem_exception() {
     FaultSimulationOrder faultSimulationOrder = createFaultSimulationOrder(
-        createFaultSimulationItem("testSvc", FramePosition.CF, FaultType.EXCEPTION, "other error"),
-        createFaultSimulationItem("testSvc2", FramePosition.BIZ, FaultType.EXCEPTION, "other error"),
-        createFaultSimulationItem("testSvc", FramePosition.BIZ, FaultType.EXCEPTION, "test error")
+        createFaultSimulationItem("testSvc", FramePosition.CF_AF, FaultType.EXCEPTION, "other error"),
+        createFaultSimulationItem("testSvc2", FramePosition.BIZ_AF, FaultType.EXCEPTION, "other error"),
+        createFaultSimulationItem("testSvc", FramePosition.BIZ_AF, FaultType.EXCEPTION, "test error")
     );
 
     try {
-      faultSimulationManager.consumeFaultSimulationItem(faultSimulationOrder);
+      faultSimulator.consumeFaultSimulationItem("testSvc", FramePosition.BIZ_AF, faultSimulationOrder);
       fail("an exception is expected!");
     } catch (Exception e) {
       Assert.assertEquals(RuntimeException.class, e.getClass());
@@ -47,7 +43,7 @@ public class FaultSimulationManagerTest {
   @Test
   public void consumeFaultSimulationItem_empty() {
     FaultSimulationOrder faultSimulationOrder = createFaultSimulationOrder();
-    faultSimulationManager.consumeFaultSimulationItem(faultSimulationOrder);
+    faultSimulator.consumeFaultSimulationItem("testSvc", FramePosition.BIZ_AF, faultSimulationOrder);
   }
 
   private FaultSimulationOrder createFaultSimulationOrder(FaultSimulationItem... faultSimulationItems) {

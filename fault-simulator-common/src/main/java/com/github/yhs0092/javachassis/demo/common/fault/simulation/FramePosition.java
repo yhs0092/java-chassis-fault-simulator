@@ -2,23 +2,34 @@ package com.github.yhs0092.javachassis.demo.common.fault.simulation;
 
 public enum FramePosition {
   /**
-   * HttpServerFilter
+   * HttpServerFilter#afterReceiveRequest
    */
-  SF,
+  SF_AF,
   /**
-   * HttpClientFilter
+   * HttpServerFilter#beforeSendResponse
    */
-  CF,
+  SF_BF,
+  /**
+   * HttpClientFilter#beforeSendRequest
+   */
+  CF_BF,
+  /**
+   * HttpClientFilter#afterReceiveResponse
+   */
+  CF_AF,
   /**
    * Provider Handler
    */
-  PH,
+  PH_NEXT,
+  PH_RSP,
   /**
    * Consumer Handler
    */
-  CH,
+  CH_NEXT,
+  CH_RSP,
   /**
    * business logic
    */
-  BIZ
+  BIZ_AF,
+  BIZ_BF
 }

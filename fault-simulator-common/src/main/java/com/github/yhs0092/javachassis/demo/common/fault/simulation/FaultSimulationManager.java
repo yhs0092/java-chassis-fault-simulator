@@ -1,36 +1,23 @@
 package com.github.yhs0092.javachassis.demo.common.fault.simulation;
 
+import org.apache.servicecomb.core.Invocation;
+import org.apache.servicecomb.serviceregistry.RegistryUtils;
+
 public class FaultSimulationManager {
+  static FaultSimulator faultSimulator = new FaultSimulator();
 
-  private final String svc;
+  static String svc = RegistryUtils.getMicroservice().getServiceName();
 
-  private final FramePosition position;
-
-  public FaultSimulationManager(String svc, FramePosition position) {
-    this.svc = svc;
-    this.position = position;
-  }
-
-  public void consumeFaultSimulationItem(FaultSimulationOrder faultSimulationOrder) {
-    if (null == faultSimulationOrder.getFaultSimulationItemList()
-        || faultSimulationOrder.getFaultSimulationItemList().isEmpty()) {
-      return;
-    }
-    for (FaultSimulationItem faultSimulationItem : faultSimulationOrder.getFaultSimulationItemList()) {
-      if (svc.equals(faultSimulationItem.getSvc())
-          && position.equals(faultSimulationItem.getPosition())) {
-        switch (faultSimulationItem.getFaultType()) {
-          case DELAY:
-            try {
-              Thread.sleep(Long.valueOf(faultSimulationItem.getFaultDetails()));
-              break;
-            } catch (InterruptedException e) {
-              e.printStackTrace();
-            }
-          case EXCEPTION:
-            throw new RuntimeException(faultSimulationItem.getFaultDetails());
-        }
+  public static void detectAndSimulate(Invocation invocation, FramePosition position) {
+    for (Object arg : invocation.getArgs()) {
+      if (arg instanceof FaultSimulationOrder) {
+        faultSimulator.consumeFaultSimulationItem(svc, position, (FaultSimulationOrder) arg);
+        break;
       }
     }
+  }
+
+  public static void simulate(FaultSimulationOrder order, FramePosition position) {
+    faultSimulator.consumeFaultSimulationItem(svc, position, order);
   }
 }
