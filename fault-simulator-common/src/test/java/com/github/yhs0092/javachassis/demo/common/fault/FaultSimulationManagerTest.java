@@ -5,6 +5,11 @@ import static org.junit.Assert.fail;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultSimulationItem;
+import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultSimulationManager;
+import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultSimulationOrder;
+import com.github.yhs0092.javachassis.demo.common.fault.simulation.FaultType;
+import com.github.yhs0092.javachassis.demo.common.fault.simulation.FramePosition;
 import com.google.common.collect.Lists;
 
 public class FaultSimulationManagerTest {

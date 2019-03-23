@@ -1,4 +1,4 @@
-package com.github.yhs0092.javachassis.demo.common.fault;
+package com.github.yhs0092.javachassis.demo.common.fault.simulation;
 
 public class FaultSimulationManager {
 
