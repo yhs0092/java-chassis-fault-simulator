@@ -2,36 +2,6 @@ APPLICATION_ID: FaultSimulator
 service_description:
   name: consumer
   version: 0.0.1
-cse:
-  service:
-    registry:
-      address: https://cse.cn-north-1.myhuaweicloud.com:443
-      instance:
-        watch: false
-  config:
-    client:
-      serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
-      refreshMode: 1
-      refresh_interval: 5000
-  monitor:
-    enabled: false
+servicecomb:
   rest:
     address: 0.0.0.0:9090
-
-  accesslog:
-    enabled: true
-    pattern: "%h cs-method cs-uri %s %B %D %SCB-traceId"
-
-  metrics:
-    window_time: 60000
-    invocation:
-      latencyDistribution: 0,1,10,100,1000
-    Consumer.invocation.slow:
-      enabled: true
-      msTime: 1000
-    Provider.invocation.slow:
-      enabled: true
-      msTime: 1000
-    publisher.defaultLog:
-      enabled: true
-      endpoints.client.detail.enabled: true
