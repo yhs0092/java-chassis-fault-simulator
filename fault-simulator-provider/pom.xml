@@ -18,6 +18,11 @@
       <groupId>org.apache.servicecomb</groupId>
       <artifactId>solution-basic</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.yhs0092.javachassis.demo</groupId>
+      <artifactId>fault-simulator-common</artifactId>
+      <version>${parent.version}</version>
+    </dependency>
   </dependencies>
 
 </project>
