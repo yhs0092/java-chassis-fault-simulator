@@ -6,8 +6,7 @@ public class FaultSimulator {
 
   void consumeFaultSimulationItem(String svc, FramePosition position,
       FaultSimulationOrder faultSimulationOrder) {
-    if (null == faultSimulationOrder.getFaultSimulationItemList()
-        || faultSimulationOrder.getFaultSimulationItemList().isEmpty()) {
+    if (isEmptySimulationOrder(faultSimulationOrder)) {
       return;
     }
     for (FaultSimulationItem faultSimulationItem : faultSimulationOrder.getFaultSimulationItemList()) {
@@ -15,6 +14,11 @@ public class FaultSimulator {
         simulate(faultSimulationItem);
       }
     }
+  }
+
+  private boolean isEmptySimulationOrder(FaultSimulationOrder faultSimulationOrder) {
+    return null == faultSimulationOrder.getFaultSimulationItemList()
+        || faultSimulationOrder.getFaultSimulationItemList().isEmpty();
   }
 
   private void simulate(FaultSimulationItem faultSimulationItem) {
